@@ -1,0 +1,45 @@
+<div class="container-fluid py-5 bg-info text-center mb-4">
+    <p class="display-4 text-white pt-5">
+        Browse from <br>
+        1000+ available products
+    </p>
+
+    <p class="lead text-light pt-2 pb-5">
+        From 100+ suppliers and counting...
+    </p>
+
+    <a class="btn btn-primary btn-lg d-inline-block" [routerLink]="'./'" fragment="catalog">
+        Start Shopping
+        <i class="bi bi-arrow-right-circle ms-2"></i>
+    </a>
+</div>
+
+<div class="container text-center">
+    <h1 class="display-6 fw-bold my-4" id="catalog">
+        <i class="bi bi-basket me-4"></i>
+        Shop
+    </h1>
+
+
+    <ng-container [ngTemplateOutlet]="isLoading? loading: isError? error: catalog"></ng-container>
+
+    <!-- Loading -->
+    <ng-template #loading>
+        <app-loading message="Obtaining products..."></app-loading>
+    </ng-template>
+
+    <!-- Error -->
+    <ng-template #error>
+        <app-error message="Unable to obtain products."></app-error>
+    </ng-template>
+    
+    <!-- Catalog -->
+    <ng-template #catalog>
+        <ul class="p-0 d-grid gap-3 justify-content-center" style="grid-template-columns: repeat( auto-fit, minmax(200px, 300px) );">
+            <li class="list-group-item" *ngFor="let product of products">
+                <app-product-card [product]="product"></app-product-card>
+            </li>
+        </ul>
+    </ng-template>
+
+</div>

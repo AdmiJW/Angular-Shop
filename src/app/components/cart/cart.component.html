@@ -1,0 +1,71 @@
+<div class="container my-4">
+    <h1 class="display-6 fw-bold my-3">
+        <i class="bi bi-cart4 me-2"></i>
+        My Cart
+    </h1>
+
+
+
+    <ng-container [ngTemplateOutlet]="isLoading? loading: isError? error: cartView"></ng-container>
+
+    <!-- Loading -->
+    <ng-template #loading>
+        <app-loading message="Obtaining cart items..."></app-loading>
+    </ng-template>
+
+    <!-- Error -->
+    <ng-template #error>
+        <app-error message="Unable to obtain cart items."></app-error>
+    </ng-template>
+
+    <!-- Cart Products -->
+    <ng-template #cartView>
+
+        <p class="lead my-4" *ngIf="cartProducts.length === 0">
+            <i class="bi bi-snow me-2"></i>
+            Your cart is empty.
+            <a class="btn btn-info" [routerLink]="'/'">Start shopping</a>
+        </p>
+
+
+        <ul class="d-flex p-0 flex-column">
+            <li class="list-group-item" *ngFor="let product of cartProducts">
+                <app-cart-product [product]="product"></app-cart-product>
+            </li>
+        </ul>
+
+        <div *ngIf="cartProducts.length !== 0" class="d-flex">
+            <div class="flex-grow-1">
+                <h3 class="fw-bold my-3">
+                    Total: RM{{ total | number: '1.2-2' }}
+                </h3>
+            </div>
+
+            <button class="btn btn-primary btn-lg me-2" (click)="openConfirmation(content)">
+                Checkout
+            </button>
+
+            <button class="btn btn-danger btn-lg" (click)="clearCart()">
+                Clear Cart
+            </button>
+        </div>
+    </ng-template>
+
+</div>
+
+
+
+<!-- Confirmation Modal -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Confirm checkout</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to checkout?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="modal.close('Confirm')">Confirm</button>
+        <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cancel')">Cancel</button>
+    </div>
+</ng-template>

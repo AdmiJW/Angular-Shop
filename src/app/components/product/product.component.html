@@ -1,0 +1,48 @@
+
+<div class="container text-center py-3">
+    
+    <ng-container [ngTemplateOutlet]="isLoading? loading: isError? error: productInfo"></ng-container>
+
+    <!-- Loading -->
+    <ng-template #loading>
+        <app-loading message="Obtaining item information..."></app-loading>
+    </ng-template>
+
+    <!-- Error -->
+    <ng-template #error>
+        <app-error message="Unable to get item information."></app-error>
+    </ng-template>
+    
+    <!-- Catalog -->
+    <ng-template #productInfo>
+        <div class="row">
+            <!-- Product Image -->
+            <div class="col-md-4 my-4">
+                <img [src]="product!.image" alt="Prioduct" class="w-100" style="max-height: 300px; object-fit: contain;">
+            </div>
+
+            <!-- Product Info -->
+            <div class="col-md-8 p-4 my-4 text-start bg-light rounded">
+                <h1 class='fw-bold fs-2'>{{product!.title}}</h1>
+                <span class="badge text-bg-primary mb-4">{{ product!.category | titlecase }}</span>
+
+                <h2 class='text-danger mb-5'>RM{{product!.price | number : '1.2-2' }}</h2>
+                <p class='lead fs-6 mb-5'>{{product!.description}}</p>
+
+                <p class="lead m-0">
+                    <i class="bi bi-star-fill text-warning me-2"></i>
+                    {{ product!.rating.rate }} / 5.0
+                </p>
+                <p>
+                    Rated by {{ product!.rating.count }}
+                </p>
+
+                <div class="text-end">
+                    <button class="btn btn-primary me-2" (click)="addToCart()">Add to cart</button>
+                    <button class="btn btn-warning" [routerLink]="'/'">Back</button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+</div>

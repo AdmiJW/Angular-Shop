@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand" [routerLink]="'/'">
+            <i class="bi bi-shop me-2"></i>
+            NgShop
+        </a>
+
+        <!-- Button toggle for mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a 
+                        [class]="'nav-link ' + (url === '/catalog' && 'active')" 
+                        [routerLink]="'catalog'"
+                    >
+                        Catalog
+                        <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a 
+                        [class]="'nav-link ' + (url === '/cart' && 'active')" 
+                        [routerLink]="'cart'"
+                    >
+                        Cart
+                    </a>
+                </li>
+            </ul>
+
+            <button class="btn btn-success my-2 my-sm-0" [routerLink]="'cart'">
+                Checkout
+                <i class="bi bi-cart"></i>
+            </button>
+        </div>
+    </div>
+
+</nav>

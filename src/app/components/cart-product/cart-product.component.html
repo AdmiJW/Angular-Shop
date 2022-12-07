@@ -1,0 +1,19 @@
+
+<div class="d-flex my-2 p-4 shadow">
+    <img [src]="product.image" class="mx-4" alt="Product Image" style="max-height: 125px; object-fit: contain;">
+    
+    <div class="flex-grow-1">
+        <h5 class="fw-bold card-title">{{ product.title }}</h5>
+        <p class="fs-6 mt-2 mb-0">Unit Price: RM{{ product.price | number: '1.2-2' }}</p>
+        <p class="fs-6 mb-0 mb-5">Quantity: {{ product.quantity }}</p>
+
+        <div class="d-flex align-items-center">
+            <p class="lead text-primary flex-grow-1 m-0">
+                Total: RM{{ ( product.price * product.quantity ) | number: '1.2-2' }}
+            </p>
+            
+            <button class="btn btn-danger" (click)="removeProduct()">Remove</button>
+        </div>
+
+    </div>
+</div>
